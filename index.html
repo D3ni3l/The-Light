@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sun Game</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: white;
+            transition: background-color 1s;
+        }
+        #gameContainer {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        #gameCanvas {
+            width: 50px;
+            height: 50px;
+            background-color: black;
+            border-radius: 50%;
+            position: relative;
+            transition: transform 1s, background-color 1s;
+        }
+        .ray {
+            width: 5px;
+            height: 50px;
+            background-color: black;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform-origin: bottom center;
+            transition: background-color 1s;
+        }
+        .ray1 { transform: translate(-50%, -100%) rotate(0deg); }
+        .ray2 { transform: translate(-50%, -100%) rotate(30deg); }
+        .ray3 { transform: translate(-50%, -100%) rotate(60deg); }
+        .ray4 { transform: translate(-50%, -100%) rotate(90deg); }
+        .ray5 { transform: translate(-50%, -100%) rotate(120deg); }
+        .ray6 { transform: translate(-50%, -100%) rotate(150deg); }
+        .ray7 { transform: translate(-50%, -100%) rotate(180deg); }
+        .ray8 { transform: translate(-50%, -100%) rotate(210deg); }
+        .ray9 { transform: translate(-50%, -100%) rotate(240deg); }
+        .ray10 { transform: translate(-50%, -100%) rotate(270deg); }
+        .ray11 { transform: translate(-50%, -100%) rotate(300deg); }
+        .ray12 { transform: translate(-50%, -100%) rotate(330deg); }
+    </style>
+</head>
+<body>
+    <div id="gameContainer">
+        <div id="gameCanvas">
+            <div class="ray ray1"></div>
+            <div class="ray ray2"></div>
+            <div class="ray ray3"></div>
+            <div class="ray ray4"></div>
+            <div class="ray ray5"></div>
+            <div class="ray ray6"></div>
+            <div class="ray ray7"></div>
+            <div class="ray ray8"></div>
+            <div class="ray ray9"></div>
+            <div class="ray ray10"></div>
+            <div class="ray ray11"></div>
+            <div class="ray ray12"></div>
+        </div>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var gameCanvas = document.getElementById("gameCanvas");
+            var body = document.body;
+            var isWhiteBackground = true;
+            var rotationAngle = 0;
+
+            // Función para girar el sol y cambiar los colores
+            function rotateAndChangeColor() {
+                if (isWhiteBackground) {
+                    rotationAngle += 180; // Girar a la derecha
+                } else {
+                    rotationAngle -= 180; // Girar a la izquierda
+                }
+
+                // Rotar el sol
+                gameCanvas.style.transform = "rotate(" + rotationAngle + "deg)";
+
+                // Cambiar los colores del fondo y el sol
+                if (isWhiteBackground) {
+                    body.style.backgroundColor = "black";
+                    gameCanvas.style.backgroundColor = "white";
+                    document.querySelectorAll('.ray').forEach(function(ray) {
+                        ray.style.backgroundColor = "white";
+                    });
+                } else {
+                    body.style.backgroundColor = "white";
+                    gameCanvas.style.backgroundColor = "black";
+                    document.querySelectorAll('.ray').forEach(function(ray) {
+                        ray.style.backgroundColor = "black";
+                    });
+                }
+                isWhiteBackground = !isWhiteBackground;
+            }
+
+            // Escuchar eventos de clic y táctiles
+            body.addEventListener("click", rotateAndChangeColor);
+            body.addEventListener("touchstart", rotateAndChangeColor); // Añade soporte para toque
+        });
+    </script>
+</body>
+</html> 
